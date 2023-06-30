@@ -1,5 +1,4 @@
 <?php
-echo "Bienvenue sur le blog";
 
 #j'appel mon PDO contenant les information de connexion a ma database
 include 'config/database.php';
@@ -12,15 +11,17 @@ include 'config/database.php';
 # ************************ #
 # == Frontcontroller == #
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+if (empty($action)) {
+    $action = 'home';
+}
 ## Ici je stock toutes la/les requettes GET['action'] dans la variable $action
 
 $routes = [
     # Crée un tableau un tableau associatif dans lequel je stock toutes les root possible avec une clé définit
     //'' => 'home.php',
-    'home' => 'home.php',
+    'home' => 'app/controllers/homeController.php',
     'contact' => 'contact.php',
     'about' => 'about.php',
-    '/' => 'app/controllers/homeController.php'
     // ajouter des 'clés' => 'routes' routes ici
 ];
 
