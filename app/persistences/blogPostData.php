@@ -3,7 +3,8 @@
 function lastBlogPosts(PDO $pdo)
 {
     # je fait une requette SQL dans $pdo avec "query" qui me retourne retoure le resultat dans
-    # je récupère le statement dans une variable que j'ai apeller $query
+    # ma requette est stocker dans $request dont j'appelle les donnée qui sont dans lastBlogPosts.sql
+    # je récupère le statement dans une variable que j'ai apeller $statement
     $request = file_get_contents('database/lastBlogPosts.sql');
     $statment = $pdo->query(
         $request

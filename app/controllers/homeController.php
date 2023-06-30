@@ -1,8 +1,6 @@
 <?php
-echo "\nHello world";
-
+# j'importe le contenu de blogPostData.php qui contient ma fonction qui s'occupe de faire les requette SQL
 include 'app/persistences/blogPostData.php';
-$value = lastBlogPosts($pdo);
-echo '<pre>';
-print_r($value) ;
-echo '</pre>';
+
+# j'importe le contenu de home.tpl.php qui s'occupe d'afficher le contenu que je lui ai demander.
+include 'ressources/views/home.tpl.php';
