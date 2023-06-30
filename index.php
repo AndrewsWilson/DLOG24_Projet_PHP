@@ -1,24 +1,15 @@
 <?php
 echo "Bienvenue sur le blog";
 
-#J'appelle mon fichier contenant mes identifiant d'accès a la BDD
-require 'config/database.php';
+#j'appel mon PDO contenant les information de connexion a ma database
+include 'config/database.php';
 
-try{
-    #j'instancie ma PDO en la stockant dans ma variable $PDO que je pourrais utiliser plus tard
-    $pdo = new PDO($DB_CONFIG['DSN'],$DB_CONFIG['USER'],$DB_CONFIG['PASS']);
-    echo 'CONNEXION REUSSIT';
-}
-catch(PDOException $pe)
-{
-    #si erreur il y a cela affichera erreur : $pe(qui contiendra le message d'erreur)
-    echo 'ERREUR : ' . $pe->getMessage();
-}
-
-
-
-
-
+# ************************ #
+// infos sur les différents types de requettes : // 
+    # REQUETTE SQL EXEC permet d'executer une requette mais renvoie juste le nbre de ligne affectés (interessant pour : insert, delete, update)
+    # REQUETTE SQL PREPARE permet de faire une requette préparer
+    # REQUETTE SQL QUERY execute une requette SQL et retourne le resultat dans PDO statement
+# ************************ #
 # == Frontcontroller == #
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 ## Ici je stock toutes la/les requettes GET['action'] dans la variable $action
@@ -29,6 +20,7 @@ $routes = [
     'home' => 'home.php',
     'contact' => 'contact.php',
     'about' => 'about.php',
+    '/' => 'app/controllers/homeController.php'
     // ajouter des 'clés' => 'routes' routes ici
 ];
 
@@ -43,10 +35,3 @@ if (!array_key_exists($action,$routes)) {
     $page = $routes[$action];
     include $page;
 }
-
-
-
-
-
-
-
