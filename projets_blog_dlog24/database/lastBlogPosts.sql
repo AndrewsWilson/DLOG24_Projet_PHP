@@ -1,5 +1,5 @@
     SELECT 
-         article_title, author_name
+         title, pseudo,articles.id
     FROM
         articles
     INNER JOIN

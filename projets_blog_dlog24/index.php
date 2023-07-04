@@ -11,15 +11,18 @@ include 'config/database.php';
 # ************************ #
 # == Frontcontroller == #
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-if (empty($action)) {
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+if (empty($action) || !isset($id) || empty($id)) {
     $action = 'home';
 }
+
 ## Ici je stock toutes la/les requettes GET['action'] dans la variable $action
 
 $routes = [
     # Crée un tableau un tableau associatif dans lequel je stock toutes les root possible avec une clé définit
     //'' => 'home.php',
     'home' => 'app/controllers/homeController.php',
+    'blogpost' => 'app/controllers/blogPostController.php',
     'contact' => 'contact.php',
     'about' => 'about.php',
     // ajouter des 'clés' => 'routes' routes ici
