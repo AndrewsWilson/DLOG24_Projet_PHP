@@ -1,16 +1,31 @@
 <?php
-#################
-include 'ressources/views/header.tpl.php';
-#################
+//################# CONTROLER PAGE blogPost#################
+// - traitement des fonctions PDO pour récupération des donnée de l'article selectionné
+// - traitement de l'affichage via blogpost.tpl.php
+// - Renvoie de la page sur index.php
 
-# j'importe le contenu de blogPostData.php qui contient mes deux fonction
-# une qui : récupère le contenu des articles & leurs auteurs
-# une autre qui : récupère les commentaires des articles et leurs auteurs
+
+
+//################# valeur de title & description #################
+$meta_description = 'les articles';
+$meta_title = 'Articles';
+
+
+//################# import fonctions PDO utilisation : blogPostById() & commentByBlogPost  #################
+//  - une qui : récupère le contenu des articles & leurs auteurs
+//  - une autre qui : récupère les commentaires des articles et leurs auteurs
 include 'app/persistences/blogPostData.php';
 
-# j'importe le contenu de home.tpl.php qui s'occupe d'afficher le contenu que je lui ai demander.
-include 'ressources/views/blogPost.tpl.php';
 
-#################
-include 'ressources/views/footer.tpl.php';
-#################
+
+//################# Si article existe pas/plus inlude page article HS + retour sommaire #################
+//################# Sinon affichage vieuw avec article concerner #################
+//################# + stockage de la valeur de la PDO blogPostById dans $post #################
+if (empty($post = blogPostById($pdo,$id))) {
+    echo "L'ARTICLE N'EXISTE PLUS";
+} else {
+    include 'ressources/views/blogPost.tpl.php';
+}
+
+
+

@@ -1,18 +1,12 @@
 <?php
-//# $post réucupère la valeur de la fonction blogPostById
-//# Il y a ici une condition qui dit
-//# ---- SI $post est vide ALORS -> affiche "l'article n'existe pas"
-//# ---- SINON il affiche la valeur de chaques key du tableau $post
-
-if (empty($post = blogPostById($pdo,$id))) {
-    echo "L'ARTICLE N'EXISTE PLUS";
-}
+//################# import header #################
+include 'ressources/views/header.tpl.php';
 ?>
 
-<!--# $comment réucupère la valeur de la fonction commentByBlogPOst-->
-<!--# Il y a ici une condition qui dit-->
-<!--# ---- SI $comment est vide ALORS -> affiche "il n'y a aucuns commentaires"-->
-<!--# ---- SINON il affiche la valeur de chaques key du tableau $comment-->
+
+
+<!--################# affichage des données de l'article stocker dans $post #################-->
+<!--# $post stock les données de l'article récupéré via la fonction blogPostById dans blogPostController.php-->
 
 <div class="card container-sm w-75">
     <svg class="bd-placeholder-img card-img-top mt-3 px-5" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
@@ -30,6 +24,8 @@ if (empty($post = blogPostById($pdo,$id))) {
 
 <div class="my-5 text-center d-flex flex-wrap justify-content-center">
 <?php
+//<!--#### $comment stock les donnée de chaque commentaire récupéré via la fonction commentSByBlogPost ###-->
+//<!--#### SI comment est vide affiche "aucuns commentaire, SINON affichage des commentaires MEF HTML"####-->
 if (empty($comment = commentsByBlogPost($pdo,$id))) :
 echo "Aucuns commentaires";
 else :
@@ -46,3 +42,10 @@ endif;
 <div class="py-5 d-flex justify-content-center">
     <a href="http://blog.local/" type="button" class="btn btn-success">RETOUR AU SOMMAIRE</a>
 </div>
+
+
+
+<?php
+//################# import footer #################
+include 'ressources/views/footer.tpl.php';
+?>

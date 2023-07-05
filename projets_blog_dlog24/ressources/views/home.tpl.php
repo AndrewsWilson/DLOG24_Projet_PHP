@@ -1,15 +1,18 @@
-<?php 
+<?php
 
-# $post stocke les donnée récupéré(de la BDD) via la fonction lasstBlogPosts
-# Il y a ici une condition qui dit 
-# ---- SI $value est vide ALORS -> affiche "il n'y a pas d'articles"
-# ---- SINON boucle foreach pour afficher chaques articles mis en page avec une HTML
 
+//################# import header template #################
+include 'header.tpl.php';
+
+
+//################# $post stock les 10 dernier articles récupéré par lastBlogposts() #################
+//################# SI $post est vide alors affichage "il n'y a pas d'articles" #################
 if (empty($post = lastBlogPosts($pdo))) :
     ?>
     <div>il n'y a pas d'articles</div>
 <?php
 else :
+//################# Sinon affichage de chaque index avec MEF HTML #################
     echo '<div class="d-flex flex-wrap justify-content-center">';
     foreach ($post as $key){
         ?>
@@ -27,3 +30,6 @@ else :
     }
     echo '</div>';
 endif;
+
+//################# import FOOTER template #################
+include 'ressources/views/footer.tpl.php';

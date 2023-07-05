@@ -51,7 +51,7 @@ function blogPostById(PDO $pdo, int $id) : array
     if (empty($post)) return [];
     return $post[0];
 }
-
+//######################################################################################################################
 function commentsByBlogPost(PDO $pdo, $id) : array
 {
     # je fait une requette SQL dans $pdo avec la méthode "prepare" prépare et me retourne le resultat de ma requette
@@ -79,3 +79,45 @@ function commentsByBlogPost(PDO $pdo, $id) : array
     $post = $statment->fetchAll();
     return $post;
 }
+
+//######################################################################################################################
+function authorsByPseudo(PDO $pdo, string $pseudo, string $name, string $firstname) : int
+{
+    $request = file_get_contents('database/searchAuthor.sql');
+    $statment = $pdo->prepare(
+        $request
+    );
+    $statment->execute(['pseudo' => $pseudo]);
+    if ($statment === false) {
+        var_dump($pdo->errorInfo());
+        die('Erreur SQL');
+    }
+
+    $post = $statment->fetchAll();
+    if (empty($post)) {
+        $request = file_get_contents('database/createAuthor.sql');
+        $statment = $pdo->prepare(
+            $request
+        );
+        $statment->execute(['pseudo' => $pseudo, 'name' => $name, 'firstname' => $firstname]);
+//      fonction lastInsertId permettant de retourner le dernier ID crée dans la BDD
+        return $pdo->lastInsertId();
+    };
+    return $post[0]['id'];
+}
+
+
+function createArticle(PDO $pdo, string $title, string $text, string $startDate, string $endDate, string $degree, string $id)
+{
+    $request = file_get_contents('database/creatArticle.sql');
+    $statment = $pdo->prepare(
+        $request
+    );
+    $statment->execute(['title'=>$title, 'text'=>$text, 'start_date'=>$startDate, 'end_date'=>$endDate, 'degree'=>$degree, 'authors_id'=>$id]);
+
+    if ($statment === false) {
+        var_dump($pdo->errorInfo());
+        die('Erreur SQL');
+    }
+}
+
