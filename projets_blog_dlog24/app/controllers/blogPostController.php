@@ -19,7 +19,7 @@ include 'app/persistences/blogPostData.php';
 
 
 //################# Si article existe pas/plus inlude page article HS + retour sommaire #################
-//################# Sinon affichage vieuw avec article concerner #################
+//################# Sinon affichage view avec article concerner #################
 //################# + stockage de la valeur de la PDO blogPostById dans $post #################
 if (empty($post = blogPostById($pdo,$id))) {
     echo "L'ARTICLE N'EXISTE PLUS";

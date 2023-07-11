@@ -36,6 +36,7 @@ $routes = [
     'home' => 'app/controllers/homeController.php',
     'blogpost' => 'app/controllers/blogPostController.php',
     'create' => 'app/controllers/blogPostCreateController.php',
+    'blogpostmodify' => 'app/controllers/blogPostModifyController.php',
     'contact' => 'contact.php',
     'about' => 'about.php',
 
